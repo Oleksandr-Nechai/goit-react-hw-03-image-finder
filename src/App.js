@@ -1,25 +1,43 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Modal from './components/Modal';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  state = {
+    pictures: [],
+    page: 1,
+    query: '',
+    largeImage: '',
+    imgTags: '',
+    error: '',
+    showModal: true,
+    isLoading: false,
+  };
 
+  toggleModal = () => {
+    this.setState(state => ({
+      showModal: !state.showModal,
+    }));
+  };
+
+  bigImage = (largeImage = '') => {
+    this.setState({ largeImage });
+
+    this.toggleModal();
+  };
+
+  render() {
+    //const visibleContacts = this.getVisibleContacts();
+    const { pictures, isLoading, error, showModal, largeImage, imgTags } = this.state;
+    return (
+      <div>
+        {showModal && (
+          <Modal showModal={this.bigImage}>
+            <img src={largeImage} alt={imgTags} />
+          </Modal>
+        )}
+      </div>
+    );
+  }
+}
 export default App;
