@@ -1,6 +1,6 @@
 import styles from './ImageGallery.module.css';
 import PropTypes from '.prop-types';
-import ImageGalleryItem from '../';
+import ImageGalleryItem from './ImageGalleryItem';
 
 function ImageGallery({ pictures, onClick }) {
   const element = pictures.map(picture => (
