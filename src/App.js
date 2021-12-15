@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Modal from './components/Modal';
+// import Modal from './components/Modal';
+import Searchbar from './components/Searchbar';
+import ImageGallery from './components/ImageGallery';
 import './App.css';
 
 class App extends Component {
@@ -9,11 +11,10 @@ class App extends Component {
     query: '',
     largeImage: '',
     imgTags: '',
-    error: '',
-    showModal: true,
+    error: null,
+    showModal: false,
     isLoading: false,
   };
-
   toggleModal = () => {
     this.setState(state => ({
       showModal: !state.showModal,
@@ -25,17 +26,16 @@ class App extends Component {
 
     this.toggleModal();
   };
-
+  onChangeQwery = ({ query }) => {
+    this.setState({ query: query, page: 1, pictures: [], error: null });
+  };
   render() {
-    //const visibleContacts = this.getVisibleContacts();
     const { pictures, isLoading, error, showModal, largeImage, imgTags } = this.state;
     return (
       <div>
-        {showModal && (
-          <Modal showModal={this.bigImage}>
-            <img src={largeImage} alt={imgTags} />
-          </Modal>
-        )}
+        <Searchbar onSubmit={this.onChangeQwery} />
+        {error && <p>Error</p>}
+        <ImageGallery pictures={pictures} onClick={this.bigImage} />
       </div>
     );
   }
