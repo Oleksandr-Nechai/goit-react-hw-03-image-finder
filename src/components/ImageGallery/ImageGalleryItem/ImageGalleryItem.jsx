@@ -7,7 +7,7 @@ function ImageGalleryItem({ picture, onClick }) {
       <img
         src={picture.webformatURL}
         alt={picture.tags}
-        className={styles.imageGalleryItem - image}
+        className={styles.imageGalleryItem_image}
       />
     </li>
   );

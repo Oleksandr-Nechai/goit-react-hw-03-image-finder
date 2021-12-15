@@ -1,8 +1,7 @@
 import { createPortal } from 'react-dom';
 import { Component } from 'react';
-import styles from "./Modal.module.css";
-import ProrTypes from "prop-types";
-
+import styles from './Modal.module.css';
+import ProrTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -27,14 +26,12 @@ class Modal extends Component {
 
   render() {
     return createPortal(
-      <div className={styles.Overlay} onClick={this.hendelBecdropClick}>
-        <div className={styles.Modal}>{this.props.children}</div>
+      <div className={styles.overlay} onClick={this.hendelBecdropClick}>
+        <div className={styles.modal}>{this.props.children}</div>
       </div>,
       modalRoot,
     );
   }
 }
-
-//this.props.showModal()
 
 export default Modal;

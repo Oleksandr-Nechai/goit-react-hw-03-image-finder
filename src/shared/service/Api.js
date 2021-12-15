@@ -1,28 +1,26 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// const instance = axios.create({
-//     baseURL: 'http://localhost:4000/products',
-//     key = '24494931-7dc5820272f9876b2770bf0f4',
+const key = '24494931-7dc5820272f9876b2770bf0f4';
 
-//   params: {
-//     _limit: 12,
-//   },
-// });
+const instance = axios.create({
+  baseURL: 'https://pixabay.com/api',
+  params: {
+    key: key,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    per_page: 20,
+  },
+});
 
-// const getProducts = page => {
-//   return instance.get(`/?_page=${page}`);
-// };
+const searchPictures = (page = 1, q) => {
+  return instance.get('/', {
+    params: {
+      page,
+      q,
+    },
+  });
+};
 
-// const searchProducts = (_page = 1, q) => {
-//   return instance.get('/', {
-//     params: {
-//       _page,
-//       q,
-//     },
-//   });
-// };
-
-// export const productsApi = {
-//   getProducts,
-//   searchProducts,
-// };
+export const productsApi = {
+  searchPictures,
+};
