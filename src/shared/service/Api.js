@@ -8,7 +8,7 @@ const instance = axios.create({
     key: key,
     image_type: 'photo',
     orientation: 'horizontal',
-    per_page: 20,
+    per_page: 12,
   },
 });
 

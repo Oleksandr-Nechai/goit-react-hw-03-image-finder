@@ -26,17 +26,18 @@ class App extends Component {
       this.fetchProducts();
     }
   }
+
   toggleModal = () => {
     this.setState(state => ({
       showModal: !state.showModal,
     }));
   };
   async fetchProducts() {
-    const { page, query } = this.state;
-    this.setState({ isLoading: true });
     try {
+      const { page, query } = this.state;
+      this.setState({ isLoading: true });
       const { data } = await productsApi.searchPictures(page, query);
-      this.setState(({ pictures, page }) => {
+      this.setState(({ pictures }) => {
         const newState = {
           pictures: [...pictures, ...data.hits],
           isLoading: false,
@@ -44,6 +45,9 @@ class App extends Component {
         };
         if (data.hits.length < 11) {
           newState.finish = true;
+        }
+        if (data.hits.length === 0) {
+          newState.error = true;
         }
         return newState;
       });
@@ -74,8 +78,8 @@ class App extends Component {
     return (
       <div className="App">
         <Searchbar onSubmit={this.onChangeQwery} />
-        {error && <p>Error</p>}
-        <ImageGallery pictures={pictures} onClick={this.bigImage} />
+        {error && <h1>Impossible to load the pictures!</h1>}
+        {!error && <ImageGallery pictures={pictures} onClick={this.bigImage} />}
         {!finish && pictures.length > 11 && !isLoading && <Button onClick={this.loadMore} />}
         {isLoading && <Loader />}
         {showModal && (

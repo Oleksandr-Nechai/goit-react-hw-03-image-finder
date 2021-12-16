@@ -1,5 +1,5 @@
 import styles from './Button.module.css';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function Button({ onClick }) {
   return (
@@ -12,6 +12,6 @@ function Button({ onClick }) {
 }
 
 Button.propTypes = {
-  onClick: propTypes.func,
+  onClick: PropTypes.func.isRequired,
 };
 export default Button;

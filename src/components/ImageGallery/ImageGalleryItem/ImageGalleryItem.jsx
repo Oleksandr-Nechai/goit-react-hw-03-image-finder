@@ -13,9 +13,11 @@ function ImageGalleryItem({ picture, onClick }) {
   );
 }
 ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string,
-  largeImageURL: PropTypes.string,
-  tags: PropTypes.string,
+  picture: PropTypes.shape({
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+  }).isRequired,
   onClick: PropTypes.func,
 };
 

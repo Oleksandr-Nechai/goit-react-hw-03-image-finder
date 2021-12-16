@@ -8,9 +8,15 @@ function ImageGallery({ pictures, onClick }) {
   ));
   return <ul className={styles.imageGallery}>{element}</ul>;
 }
-ImageGallery.propTypes = {
-  pictures: PropTypes.array,
-  onClick: PropTypes.func,
-};
 
+ImageGallery.propTypes = {
+  picture: PropTypes.array(
+    PropTypes.shape({
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default ImageGallery;
