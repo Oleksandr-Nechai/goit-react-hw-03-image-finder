@@ -24,6 +24,7 @@ class App extends Component {
     const { query, isLoading, page } = this.state;
     if (prevState.query !== query || (isLoading && prevState.page < page)) {
       this.fetchProducts();
+      this.setState({ finish: false });
     }
   }
 
@@ -80,7 +81,7 @@ class App extends Component {
         <Searchbar onSubmit={this.onChangeQwery} />
         {error && <h1>Impossible to load the pictures!</h1>}
         {!error && <ImageGallery pictures={pictures} onClick={this.bigImage} />}
-        {!finish && pictures.length > 11 && !isLoading && <Button onClick={this.loadMore} />}
+        {!finish && pictures.length !== 0 && <Button onClick={this.loadMore} />}
         {isLoading && <Loader />}
         {showModal && (
           <Modal showModal={this.bigImage}>

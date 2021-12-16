@@ -10,7 +10,7 @@ function ImageGallery({ pictures, onClick }) {
 }
 
 ImageGallery.propTypes = {
-  picture: PropTypes.array(
+  pictures: PropTypes.arrayOf(
     PropTypes.shape({
       webformatURL: PropTypes.string.isRequired,
       largeImageURL: PropTypes.string.isRequired,
