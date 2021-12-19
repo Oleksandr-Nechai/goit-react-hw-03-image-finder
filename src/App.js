@@ -46,6 +46,7 @@ class App extends Component {
         };
         if (data.hits.length < 11) {
           newState.finish = true;
+          alert('dddd');
         }
         if (data.hits.length === 0) {
           newState.error = true;
