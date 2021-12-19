@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { query, isLoading, page } = this.state;
-    if (prevState.query !== query || (isLoading && prevState.page < page)) {
+    if (prevProps.query !== query || (isLoading && prevProps.page < page)) {
       this.fetchProducts();
       this.setState({ finish: false });
     }
@@ -46,10 +46,10 @@ class App extends Component {
         };
         if (data.hits.length < 11) {
           newState.finish = true;
-          alert('dddd');
         }
-        if (data.hits.length === 0) {
+        if (!data.hits.length) {
           newState.error = true;
+          alert('hh');
         }
         return newState;
       });
@@ -61,7 +61,7 @@ class App extends Component {
     }
   }
 
-  bigImage = (largeImage = '') => {
+  handleOpenModal = (largeImage = '') => {
     this.setState({ largeImage });
 
     this.toggleModal();
@@ -81,11 +81,11 @@ class App extends Component {
       <div className="App">
         <Searchbar onSubmit={this.onChangeQwery} />
         {error && <h1>Impossible to load the pictures!</h1>}
-        {!error && <ImageGallery pictures={pictures} onClick={this.bigImage} />}
+        {!error && <ImageGallery pictures={pictures} onClick={this.handleOpenModal} />}
         {!finish && pictures.length !== 0 && <Button onClick={this.loadMore} />}
         {isLoading && <Loader />}
         {showModal && (
-          <Modal showModal={this.bigImage}>
+          <Modal showModal={this.handleOpenModal}>
             <img src={largeImage} alt={imgTags} />
           </Modal>
         )}
