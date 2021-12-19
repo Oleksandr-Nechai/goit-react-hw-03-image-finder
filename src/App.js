@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { query, isLoading, page } = this.state;
-    if (prevProps.query !== query || (isLoading && prevProps.page < page)) {
+    if (prevState.query !== query || (isLoading && prevState.page < page)) {
       this.fetchProducts();
       this.setState({ finish: false });
     }
@@ -49,7 +49,6 @@ class App extends Component {
         }
         if (!data.hits.length) {
           newState.error = true;
-          alert('hh');
         }
         return newState;
       });
